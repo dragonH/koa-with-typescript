@@ -2,20 +2,11 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import env from './config/env';
 import routes from './controllers/index.controller';
+import logMiddleware from './middleware/log.middleware';
 
 const app = new Koa();
 const router = new Router();
-app.use(async (ctx, next) => {
-  try {
-    await next();
-    if (ctx.status === 404) {
-      ctx.throw(404, 'Route not exist');
-    }
-  } catch (error) {
-    ctx.status = error.status;
-    ctx.body = error;
-  }
-});
+app.use(logMiddleware);
 router.use('/api/v1', routes.routes());
 app.use(router.routes());
 app.listen(env.port, () => {
