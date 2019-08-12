@@ -1,15 +1,17 @@
+import { BaseContext } from 'koa';
 import log4js from '../config/log.config';
+
 
 const logger = log4js.getLogger();
 
-export default async (ctx: any, next: any) => {
+export default async (ctx: BaseContext, next: Function): Promise<void> => {
   const userIp = ctx.get('HTTP_X_REAL_IP')
     || ctx.get('X-Read-IP')
     || ctx.get('HTTP_X_FORWARDED_FOR')
     || ctx.get('X-Forwarded-For')
     || ctx.get('Remote_Addr')
     || ctx.ip;
-  const data:any = {
+  const data:{[key: string]:string} = {
     ip: userIp,
   };
   try {

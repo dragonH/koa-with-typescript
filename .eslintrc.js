@@ -1,10 +1,13 @@
 module.exports = {
+  parser: "@typescript-eslint/parser",
   env: {
     es6: true,
     node: true,
   },
   extends: [
     'airbnb-base',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint'
   ],
   globals: {
     Atomics: 'readonly',
@@ -17,9 +20,8 @@ module.exports = {
   rules: {
     "linebreak-style": 0
   },
-  parser: 'typescript-eslint-parser',
   plugins: [
-    'typescript'
+    '@typescript-eslint'
   ],
   "settings": {
     "import/resolver": {
