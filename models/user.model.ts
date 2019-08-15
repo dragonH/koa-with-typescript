@@ -9,4 +9,12 @@ export default {
         .catch((err): void => reject(err));
     });
   },
+  addNewUser(newUserData: object): Promise<boolean> {
+    return new Promise((resolve, reject): void => {
+      const collection = db.get('users');
+      collection.insert(newUserData)
+        .then((res): void => resolve(res))
+        .catch((err): void => reject(err));
+    });
+  },
 };
