@@ -20,7 +20,16 @@ router.post('/get-users', async (ctx): Promise<void> => {
 router.post('/add-new-user', async (ctx): Promise<void> => {
   try {
     const datas = ctx.request.body;
-
+    const paramsCheckResult = await checkParamsHelper(datas, ['account', 'password']);
+    if (!paramsCheckResult) {
+      ctx.throw(400, 'Missing params');
+    }
+    datas.password = await hashHelper(datas.password);
+    const addNewUserResult = await userService.addNewUser(datas);
+    ctx.status = addNewUserResult ? 200 : 400;
+    ctx.body = {
+      result: addNewUserResult,
+    };
   } catch (err) {
     ctx.throw(500, err);
   }
