@@ -13,7 +13,7 @@ export default {
     return new Promise((resolve, reject): void => {
       const collection = db.get('users');
       collection.insert(newUserData)
-        .then((res): void => resolve(res))
+        .then((): void => resolve(true))
         .catch((err): void => reject(err));
     });
   },

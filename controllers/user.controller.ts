@@ -24,6 +24,10 @@ router.post('/add-new-user', async (ctx): Promise<void> => {
     if (!paramsCheckResult) {
       ctx.throw(400, 'Missing params');
     }
+    const checkIfUserAccountExistRsult = await userService.checkIfUserAccountExist(datas.account);
+    if (checkIfUserAccountExistRsult) {
+      ctx.throw(400, 'User account exist');
+    }
     datas.password = await hashHelper(datas.password);
     const addNewUserResult = await userService.addNewUser(datas);
     ctx.status = addNewUserResult ? 200 : 400;

@@ -23,6 +23,18 @@ export default {
       }
     });
   },
+  checkIfUserAccountExist(account: string): Promise<boolean> {
+    return new Promise(async (resolve, reject): Promise<void> => {
+      try {
+        const query = [{ account }];
+        const checkResult = await userModel.getUsers(query)
+          .then((res): boolean => res.length > 0);
+        resolve(checkResult);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
   addNewUser(paramsData: {[key: string]: string}): Promise<boolean> {
     return new Promise(async (resolve, reject): Promise<void> => {
       try {
