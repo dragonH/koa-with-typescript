@@ -15,7 +15,7 @@
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
-    "log4js": "^4.5.1",
+    "log4js": "^6.4.0",
     "monk": "^7.0.0"
   },
   "devDependencies": {
